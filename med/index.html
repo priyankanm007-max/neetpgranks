@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEET PG Cutoff Finder</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-theme="light">
+    <header id="appHeader" class="topbar" hidden>
+      <div class="brand-wrap">
+        <div class="brand-mark">PG</div>
+        <div>
+          <h1>NEET PG Cutoff Finder</h1>
+        </div>
+      </div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">Dark mode</button>
+    </header>
+
+    <main class="container">
+      <section id="welcomeScreen" class="welcome-screen" aria-label="Medical study welcome screen">
+        <img class="welcome-photo" src="assets/medical-study.jpg" alt="A stethoscope on a pale blue background" />
+        <div class="welcome-title-wrap">
+          <h1>Welcome to Cutoff Rank Portal</h1>
+          <p>For Dr. Deepak Kumar</p>
+        </div>
+        <button id="openSearchBtn" class="open-search-button" type="button" aria-label="Open cutoff search" title="Open cutoff search">
+          <span class="search-icon" aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <section id="searchExperience" class="search-experience" hidden>
+        <button id="backToWelcome" class="back-button" type="button">&larr; Welcome</button>
+        <form id="branchSearchForm" class="card search-panel">
+          <label for="branchSearch">Search branch name</label>
+          <input id="branchSearch" type="search" placeholder="Enter branch name" autocomplete="off" aria-autocomplete="list" aria-controls="searchSuggestions" />
+          <div id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Branch suggestions" hidden></div>
+        </form>
+
+        <section id="resultPanel" class="card results-panel" aria-live="polite" hidden></section>
+      </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
