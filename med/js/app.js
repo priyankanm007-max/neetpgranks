@@ -1,3 +1,42 @@
+const SURGERY_OBC_COLLEGES = [
+  'Bangalore Medical College & Research Institute (G)',
+  'BGS Global Institute of Medical Sciences (P)',
+  'Chamarajanagar Institute of Medical Sciences (G)',
+  'Father Muller Medical College (P)',
+  'JJM Medical College (P)',
+  'K.V.G. Medical College (P)',
+  'Karnataka Institute of Medical Sciences, Hubballi (G)',
+  'Kempegowda Institute of Medical Sciences (P)',
+  'Kodagu Institute of Medical Sciences (G)',
+  'M.S. Ramaiah Medical College (D)',
+  'S. Nijalingappa Medical College (P)',
+  'Shri Atal Bihari Vajpayee Medical College (G)',
+  'Vijayanagara Institute of Medical Sciences (G)'
+];
+
+const SURGERY_GM_COLLEGES = [
+  'BGS Global Institute of Medical Sciences (P)',
+  'Chamarajanagar Institute of Medical Sciences (G)',
+  'Dr. Chandramma Dayananda Sagar Institute (D)',
+  'East Point College of Medical Sciences (P)',
+  'Father Muller Medical College (P)',
+  'Hassan Institute of Medical Sciences (G)',
+  'JJM Medical College (P)',
+  'Kanachur Institute of Medical Sciences (P)',
+  'Karnataka Institute of Medical Sciences, Hubballi (G)',
+  'Karwar Institute of Medical Sciences (G)',
+  'Kempegowda Institute of Medical Sciences (P)',
+  'M.S. Ramaiah Medical College (D)',
+  'Mahadevappa Rampure Medical College (P)',
+  'Mandya Institute of Medical Sciences (G)',
+  'Raichur Institute of Medical Sciences (G)',
+  'S.S. Institute of Medical Sciences (P)',
+  'Sapthagiri Institute of Medical Sciences (D)',
+  'Shri Atal Bihari Vajpayee Medical College (G)',
+  'Srinivas Institute of Medical Sciences (D)',
+  'Vydehi Institute of Medical Sciences (P)'
+];
+
 const SPECIALIZATION_CUTOFFS = [
   {
     specialization: 'MD Radio-Diagnosis',
@@ -22,7 +61,11 @@ const SPECIALIZATION_CUTOFFS = [
   {
     specialization: 'MS General Surgery',
     cutoffGroup: 'GM',
-    cutoffs: { 2022: '6500 - 18200', 2023: '2500 - 19100', 2024: '4800 - 19800', 2025: '5100 - 20500' }
+    cutoffs: { 2022: '6500 - 18200', 2023: '2500 - 19100', 2024: '4800 - 19800', 2025: '5100 - 20500' },
+    collegeNote: '2025 also has same college name list',
+    collegeLists: [
+      { year: 2024, colleges: SURGERY_GM_COLLEGES }
+    ]
   },
   {
     specialization: 'MS OBGYN',
@@ -72,7 +115,12 @@ const SPECIALIZATION_CUTOFFS = [
   {
     specialization: 'MS General Surgery',
     cutoffGroup: '2A / 2AG / OBC',
-    cutoffs: { 2022: '9200 - 20500', 2023: '4800 - 21800', 2024: '7700 - 22400', 2025: '8200 - 23100' }
+    cutoffs: { 2022: '9200 - 20500', 2023: '4800 - 21800', 2024: '7700 - 22400', 2025: '8200 - 23100' },
+    collegeCategory: 'OBC',
+    collegeLists: [
+      { year: 2024, colleges: SURGERY_OBC_COLLEGES }
+    ],
+    collegeNote: '2025 also has same college name list'
   },
   {
     specialization: 'MD Anaesthesiology',
@@ -82,107 +130,258 @@ const SPECIALIZATION_CUTOFFS = [
   {
     specialization: 'MD Radio-Diagnosis',
     cutoffGroup: 'ME',
-    cutoffs: { 2022: '', 2023: '', 2024: '', 2025: '' }
+    cutoffs: { 2022: '10500-16000', 2023: '12000-18000', 2024: '7100', 2025: '7850' }
   },
   {
     specialization: 'MD General Medicine',
     cutoffGroup: 'ME',
-    cutoffs: { 2022: '', 2023: '', 2024: '', 2025: '' }
+    cutoffs: { 2022: '12800-20000', 2023: '14000-22000', 2024: '15100-25000', 2025: '16000-27500' }
   },
   {
     specialization: 'MD Dermatology',
     cutoffGroup: 'ME',
-    cutoffs: { 2022: '', 2023: '', 2024: '', 2025: '' }
+    cutoffs: { 2022: '14000-22500', 2023: '16900-25000', 2024: '18000-28000', 2025: '19200-30000' }
   },
   {
     specialization: 'MS General Surgery',
     cutoffGroup: 'ME',
-    cutoffs: { 2022: '', 2023: '', 2024: '', 2025: '' }
+    cutoffs: { 2022: '28000-38000', 2023: '35000-42000', 2024: '38000-45000', 2025: '40000-48000' },
+    collegeLists: [
+      {
+        year: 2024,
+        colleges: [
+          'AJ Institute of Medical Sciences (P)',
+          'Kanachur Institute of Medical Sciences (P)',
+          'K.V.G. Medical College (P)',
+          'Srinivas Institute of Medical Sciences (D)'
+        ]
+      }
+    ],
+    collegeNote: '2025 also has same college name list'
   },
   {
     specialization: 'MD Anaesthesiology',
     cutoffGroup: 'ME',
-    cutoffs: { 2022: '', 2023: '', 2024: '', 2025: '' }
+    cutoffs: { 2022: '45000-58000', 2023: '51500-62000', 2024: '55000-68000', 2025: '58000-72000' }
   }
 ];
 
 const EXACT_CATEGORY_CUTOFFS = [
-  ['MD Paediatrics', 'ME', '', '', ''],
-  ['MS OBGYN', 'ME', '', '', ''],
-  ['MS Orthopaedics', 'GM', '18,900', '20,150', '21,459'],
-  ['MS Orthopaedics', '2A / 2AG', '15,800', '16,702', '17,900'],
-  ['MS Orthopaedics', 'OBC', '20,100', '21,400', '22,800'],
-  ['MS Orthopaedics', 'ME', '', '', ''],
-  ['MD Emergency Medicine', 'GM', '15,100', '16,300', '17,558'],
-  ['MD Emergency Medicine', '2A / 2AG', '18,200', '19,500', '20,800'],
-  ['MD Emergency Medicine', 'OBC', '17,400', '18,900', '19,950'],
-  ['MD Emergency Medicine', 'ME', '', '', ''],
-  ['MD Pathology', 'ME', '', '', ''],
-  ['MD Community Medicine (PSM)', 'GM', '1,85,000', '1,98,000', '2,11,980'],
-  ['MD Community Medicine (PSM)', '2A / 2AG', '1,92,000', '2,05,000', '2,18,500'],
-  ['MD Community Medicine (PSM)', 'OBC', '1,90,000', '2,02,000', '2,15,000'],
-  ['MD Community Medicine (PSM)', 'ME', '', '', ''],
-  ['MD Pharmacology', 'GM', '1,95,000', '2,10,000', '2,26,282'],
-  ['MD Pharmacology', '2A / 2AG', '2,01,000', '2,15,000', '2,29,000'],
-  ['MD Pharmacology', 'OBC', '2,05,000', '2,18,000', '2,31,000'],
-  ['MD Pharmacology', 'ME', '', '', '']
-].map(([specialization, cutoffGroup, cutoff2023, cutoff2024, cutoff2025]) => ({
+  ['MD Paediatrics', 'ME', '22,000 - 30,000', '24,000 - 32,000', '25,000 - 35,000', '26,000 - 38,000'],
+  ['MS OBGYN', 'ME', '25,000 - 33,000', '28,000 - 35,000', '29,000 - 38,000', '31,000 - 41,000'],
+  ['MS Orthopaedics', 'GM', '', '18,900', '20,150', '21,459'],
+  ['MS Orthopaedics', '2A / 2AG', '', '15,800', '16,702', '17,900'],
+  ['MS Orthopaedics', 'OBC', '', '20,100', '21,400', '22,800'],
+  ['MS Orthopaedics', 'ME', '', '', '', ''],
+  ['MD Emergency Medicine', 'GM', '', '15,100', '16,300', '17,558'],
+  ['MD Emergency Medicine', '2A / 2AG', '', '18,200', '19,500', '20,800'],
+  ['MD Emergency Medicine', 'OBC', '', '17,400', '18,900', '19,950'],
+  ['MD Emergency Medicine', 'ME', '', '', '', ''],
+  ['MD Pathology', 'ME', '95,000 - 1,10,000', '1,10,000 - 1,25,000', '1,15,000 - 1,35,000', '1,20,000 - 1,45,000'],
+  ['MD Community Medicine (PSM)', 'GM', '', '1,85,000', '1,98,000', '2,11,980'],
+  ['MD Community Medicine (PSM)', '2A / 2AG', '', '1,92,000', '2,05,000', '2,18,500'],
+  ['MD Community Medicine (PSM)', 'OBC', '', '1,90,000', '2,02,000', '2,15,000'],
+  ['MD Community Medicine (PSM)', 'ME', '', '', '', ''],
+  ['MD Pharmacology', 'GM', '', '1,95,000', '2,10,000', '2,26,282'],
+  ['MD Pharmacology', '2A / 2AG', '', '2,01,000', '2,15,000', '2,29,000'],
+  ['MD Pharmacology', 'OBC', '', '2,05,000', '2,18,000', '2,31,000'],
+  ['MD Pharmacology', 'ME', '', '', '', '']
+].map(([specialization, cutoffGroup, cutoff2022, cutoff2023, cutoff2024, cutoff2025]) => ({
   specialization,
   cutoffGroup,
-  cutoffs: { 2022: 'N/A', 2023: cutoff2023, 2024: cutoff2024, 2025: cutoff2025 }
+  cutoffs: { 2022: cutoff2022, 2023: cutoff2023, 2024: cutoff2024, 2025: cutoff2025 }
 }));
 
 SPECIALIZATION_CUTOFFS.push(...EXACT_CATEGORY_CUTOFFS);
 
-const ME_CUTOFF_UPDATES = [
-  ['MD Radio-Diagnosis', '1,200 - 4,500', '1,100 - 3,800'],
-  ['MD Dermatology', '14000-22500', '16900-25000'],
-  ['MD General Medicine', '12800-20000', '14000-22000'],
-  ['MD Paediatrics', '5,200 - 11,500', '4,800 - 10,200'],
-  ['MS OBGYN', '6,500 - 14,000', '5,800 - 12,500'],
-  ['MS Orthopaedics', '8,000 - 16,500', '7,200 - 15,000'],
-  ['MS General Surgery', '28000-38000', '35000-42000'],
-  ['MD Anaesthesiology', '45000-58000', '51500-62000'],
-  ['MD Pathology', '25,000 - 52,000', '22,000 - 48,000'],
-  ['MD Community Medicine (PSM)', '35,000 - 85,000', '32,000 - 78,000']
+const SAME_2025_COLLEGE_LISTS = [
+  {
+    specialization: 'MD Radio-Diagnosis',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mysore Medical College (G)', 'S.S. Institute of Medical Sciences (P)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Radio-Diagnosis',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mysore Medical College (G)', 'S. Nijalingappa Medical College (P)', 'Vijayanagara Institute of Medical Sciences (G)']
+  },
+  {
+    specialization: 'MD Radio-Diagnosis',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'K.V.G. Medical College (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Dermatology',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mandya Institute of Medical Sciences (G)', 'Mysore Medical College (G)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Dermatology',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mysore Medical College (G)']
+  },
+  {
+    specialization: 'MD Dermatology',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'Kanachur Institute of Medical Sciences (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Subbaiah Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Paediatrics',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Dr. BR Ambedkar Medical College (P)', 'Father Muller Medical College (P)', 'Hassan Institute of Medical Sciences (G)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mandya Institute of Medical Sciences (G)', 'Mysore Medical College (G)', 'S.S. Institute of Medical Sciences (P)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Paediatrics',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Chamarajanagar Institute of Medical Sciences (G)', 'Father Muller Medical College (P)', 'Hassan Institute of Medical Sciences (G)', 'JJM Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'Mysore Medical College (G)', 'Vijayanagara Institute of Medical Sciences (G)']
+  },
+  {
+    specialization: 'MD Paediatrics',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'Kanachur Institute of Medical Sciences (P)', 'K.V.G. Medical College (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MS OBGYN',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Dr. BR Ambedkar Medical College (P)', 'Father Muller Medical College (P)', 'Hassan Institute of Medical Sciences (G)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mandya Institute of Medical Sciences (G)', 'Mysore Medical College (G)', 'S.S. Institute of Medical Sciences (P)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MS OBGYN',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Chamarajanagar Institute of Medical Sciences (G)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'Kodagu Institute of Medical Sciences (G)', 'M.S. Ramaiah Medical College (D)', 'Mysore Medical College (G)', 'Vijayanagara Institute of Medical Sciences (G)']
+  },
+  {
+    specialization: 'MS OBGYN',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'Kanachur Institute of Medical Sciences (P)', 'K.V.G. Medical College (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Anaesthesiology',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Chamarajanagar Institute of Medical Sciences (G)', 'Dr. BR Ambedkar Medical College (P)', 'East Point College of Medical Sciences (P)', 'Hassan Institute of Medical Sciences (G)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mandya Institute of Medical Sciences (G)', 'Mysore Medical College (G)', 'S.S. Institute of Medical Sciences (P)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Anaesthesiology',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Chamarajanagar Institute of Medical Sciences (G)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'K.V.G. Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'S. Nijalingappa Medical College (P)', 'Shri Atal Bihari Vajpayee Medical College (G)', 'Vijayanagara Institute of Medical Sciences (G)']
+  },
+  {
+    specialization: 'MD Anaesthesiology',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'Kanachur Institute of Medical Sciences (P)', 'K.V.G. Medical College (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Subbaiah Institute of Medical Sciences (P)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Pathology',
+    cutoffGroup: 'GM',
+    collegeCategory: 'GM',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Belagavi Institute of Medical Sciences (G)', 'Dr. BR Ambedkar Medical College (P)', 'Hassan Institute of Medical Sciences (G)', 'JJM Medical College (P)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mandya Institute of Medical Sciences (G)', 'Mysore Medical College (G)', 'S.S. Institute of Medical Sciences (P)', 'Sapthagiri Institute of Medical Sciences (D)', 'Vydehi Institute of Medical Sciences (P)']
+  },
+  {
+    specialization: 'MD Pathology',
+    cutoffGroup: '2A / 2AG / OBC',
+    collegeCategory: 'OBC (2A/2AG)',
+    colleges: ['Bangalore Medical College & Research Institute (G)', 'BGS Global Institute of Medical Sciences (P)', 'Belagavi Institute of Medical Sciences (G)', 'Father Muller Medical College (P)', 'JJM Medical College (P)', 'Karnataka Institute of Medical Sciences, Hubballi (G)', 'Kempegowda Institute of Medical Sciences (P)', 'M.S. Ramaiah Medical College (D)', 'Mysore Medical College (G)', 'Vijayanagara Institute of Medical Sciences (G)']
+  },
+  {
+    specialization: 'MD Pathology',
+    cutoffGroup: 'ME',
+    collegeCategory: 'ME',
+    colleges: ['AJ Institute of Medical Sciences (P)', 'Kanachur Institute of Medical Sciences (P)', 'K.V.G. Medical College (P)', 'Navodaya Medical College (P)', 'Srinivas Institute of Medical Sciences (D)', 'Subbaiah Institute of Medical Sciences (P)', 'Vydehi Institute of Medical Sciences (P)']
+  }
 ];
 
-ME_CUTOFF_UPDATES.forEach(([specialization, cutoff2022, cutoff2023]) => {
-  const entry = SPECIALIZATION_CUTOFFS.find((item) => item.specialization === specialization && item.cutoffGroup === 'ME');
+SAME_2025_COLLEGE_LISTS.forEach(({ specialization, cutoffGroup, collegeCategory, colleges }) => {
+  const entry = SPECIALIZATION_CUTOFFS.find((item) => item.specialization === specialization && item.cutoffGroup === cutoffGroup);
   if (!entry) return;
-  entry.cutoffs[2022] = cutoff2022;
-  entry.cutoffs[2023] = cutoff2023;
+  entry.collegeCategory = collegeCategory;
+  entry.collegeLists = [{ year: 2024, colleges }];
+  entry.collegeNote = '2025 also has same college name list';
 });
 
-const ME_LATER_YEAR_UPDATES = [
-  ['MD Radio-Diagnosis', '7,100', '7,850'],
-  ['MD General Medicine', '15100-25000', '16000-27500'],
-  ['MD Dermatology', '18000-28000', '19200-30000'],
-  ['MS General Surgery', '38000-45000', '40000-48000'],
-  ['MD Anaesthesiology', '55000-68000', '58000-72000'],
-  ['MD Paediatrics', '19,800', '21,400'],
-  ['MS OBGYN', '23,800', '25,100'],
-  ['MS Orthopaedics', '33,200', '35,800'],
-  ['MD Emergency Medicine', '30,100', '32,400'],
-  ['MD Pathology', '1,04,500', '1,12,000'],
-  ['MD Community Medicine (PSM)', '2,22,000', '2,28,000'],
-  ['MD Pharmacology', '2,25,000', '2,35,000']
+const DISPLAYED_YEARS = [2022, 2023, 2024, 2025];
+
+const BRANCH_ALLOTMENT_TABLES = [
+  {
+    specialization: 'MD General Medicine',
+    year: 2024,
+    gmColleges: 'Bangalore Medical College & Research Institute (G); Bangalore Baptist Hospital (P); BGS Global Institute of Medical Sciences (P); Dr. BR Ambedkar Medical College (P); East Point College of Medical Sciences (P); Hassan Institute of Medical Sciences (G); JJM Medical College (P); Kempegowda Institute of Medical Sciences (P); M.S. Ramaiah Medical College (D); Mandya Institute of Medical Sciences (G); Mysore Medical College (G); S.S. Institute of Medical Sciences (P); Sapthagiri Institute of Medical Sciences (D); Shri Atal Bihari Vajpayee Medical College (G); Vydehi Institute of Medical Sciences (P)',
+    obcColleges: 'Bangalore Medical College & Research Institute (G); BGS Global Institute of Medical Sciences (P); Hassan Institute of Medical Sciences (G); JJM Medical College (P); Karnataka Institute of Medical Sciences, Hubballi (G); Kempegowda Institute of Medical Sciences (P); M.S. Ramaiah Medical College (D); Mandya Institute of Medical Sciences (G); Mysore Medical College (G); S. Nijalingappa Medical College (P); Vijayanagara Institute of Medical Sciences (G)',
+    meColleges: 'AJ Institute of Medical Sciences (P); Kanachur Institute of Medical Sciences (P); K.V.G. Medical College (P); Navodaya Medical College (P); Srinivas Institute of Medical Sciences (D); Subbaiah Institute of Medical Sciences (P); Vydehi Institute of Medical Sciences (P)'
+  },
+  {
+    specialization: 'MD General Medicine',
+    year: 2025,
+    gmColleges: 'Bangalore Medical College & Research Institute (G); BGS Global Institute of Medical Sciences (P); Father Muller Medical College (P); JJM Medical College (P); Karnataka Institute of Medical Sciences, Hubballi (G); Kempegowda Institute of Medical Sciences (P); M.S. Ramaiah Medical College (D); Mysore Medical College (G); S.S. Institute of Medical Sciences (P); Sapthagiri Institute of Medical Sciences (D); Vydehi Institute of Medical Sciences (P)',
+    obcColleges: 'Bangalore Medical College & Research Institute (P); BGS Global Institute of Medical Sciences (P); Father Muller Medical College (P); JJM Medical College (P); Kempegowda Institute of Medical Sciences (P); M.S. Ramaiah Medical College (D); Mysore Medical College (G); S. Nijalingappa Medical College (P); Vijayanagara Institute of Medical Sciences (G)',
+    meColleges: 'AJ Institute of Medical Sciences (P); K.V.G. Medical College (P); Navodaya Medical College (P); Srinivas Institute of Medical Sciences (D); Vydehi Institute of Medical Sciences (P)'
+  }
 ];
-
-ME_LATER_YEAR_UPDATES.forEach(([specialization, cutoff2024, cutoff2025]) => {
-  const entry = SPECIALIZATION_CUTOFFS.find((item) => item.specialization === specialization && item.cutoffGroup === 'ME');
-  if (!entry) return;
-  entry.cutoffs[2024] = cutoff2024;
-  entry.cutoffs[2025] = cutoff2025;
-});
-
-const normalizeBranch = (value) => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase();
 
 const getMatches = (query) => {
   const searchTerm = normalizeBranch(query);
   if (!searchTerm) return [];
-
   return SPECIALIZATION_CUTOFFS.filter((entry) => normalizeBranch(entry.specialization).includes(searchTerm));
+};
+
+const normalizeBranch = (value) => String(value || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, ' ');
+
+const renderCutoffCell = (entry, year) => {
+  const value = entry.cutoffs[year] || '';
+  return `<td class="cutoff-cell"><span class="cutoff-range">${value}</span></td>`;
+};
+
+const renderCategoryColleges = (entry) => {
+  let collegeLists = entry.collegeLists || (entry.colleges ? [{ year: entry.collegeYear, colleges: entry.colleges }] : []);
+
+  if (!collegeLists.length) {
+    const category = {
+      GM: { column: 'gmColleges', label: 'GM' },
+      '2A / 2AG / OBC': { column: 'obcColleges', label: 'OBC (2A/2AG)' },
+      ME: { column: 'meColleges', label: 'ME' }
+    }[entry.cutoffGroup];
+
+    if (category) {
+      collegeLists = BRANCH_ALLOTMENT_TABLES
+        .filter((table) => normalizeBranch(table.specialization) === normalizeBranch(entry.specialization))
+        .map((table) => ({
+          year: table.year,
+          category: category.label,
+          colleges: String(table[category.column] || '').split(';').map((college) => college.trim()).filter(Boolean)
+        }));
+    }
+  }
+
+  if (!collegeLists.length) return '';
+  const layoutClass = collegeLists.length > 1 ? ' college-lists--side-by-side' : '';
+
+  return `
+    <div class="branch-allotment-wrap">
+      <div class="college-list-groups${layoutClass}">
+        ${collegeLists.map(({ year, colleges, category }) => `
+          <section>
+            <h3>${year} ${category || entry.collegeCategory || entry.cutoffGroup} Colleges</h3>
+            <div class="college-stack">${colleges.map((college) => `<div>${college}</div>`).join('')}</div>
+          </section>
+        `).join('')}
+      </div>
+      ${entry.collegeNote ? `<p class="college-note"><strong>${entry.collegeNote}</strong></p>` : ''}
+    </div>
+  `;
 };
 
 const renderResults = (query = '') => {
@@ -197,7 +396,6 @@ const renderResults = (query = '') => {
 
   panel.hidden = false;
   const matches = getMatches(query);
-
   if (!matches.length) {
     panel.innerHTML = '<div class="empty-state"><h2>No matching specialization found</h2><p>Try another branch name.</p></div>';
     return;
@@ -219,23 +417,18 @@ const renderResults = (query = '') => {
             <thead>
               <tr>
                 <th>Specialization</th>
-                <th>2022 Cutoff</th>
-                <th>2023 Cutoff</th>
-                <th>2024 Cutoff</th>
-                <th>2025 Cutoff</th>
+                ${DISPLAYED_YEARS.map((year) => `<th>${year} Cutoff</th>`).join('')}
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>${specialization}</td>
-                <td>${entry.cutoffs[2022]}</td>
-                <td>${entry.cutoffs[2023]}</td>
-                <td>${entry.cutoffs[2024]}</td>
-                <td>${entry.cutoffs[2025]}</td>
+                ${DISPLAYED_YEARS.map((year) => renderCutoffCell(entry, year)).join('')}
               </tr>
             </tbody>
           </table>
         </div>
+        ${renderCategoryColleges(entry)}
       </article>
     `;
   });
@@ -246,7 +439,7 @@ const renderResults = (query = '') => {
 const syncThemeButton = () => {
   const button = document.getElementById('themeToggle');
   if (!button) return;
-  const mode = StorageManager.getTheme();
+  const mode = localStorage.getItem('theme') || 'light';
   button.textContent = mode === 'dark' ? 'Light mode' : 'Dark mode';
 };
 
@@ -311,13 +504,15 @@ const bindControls = () => {
   });
 
   document.getElementById('themeToggle').addEventListener('click', () => {
-    StorageManager.toggleTheme();
+    const currentTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.body.dataset.theme = currentTheme;
+    localStorage.setItem('theme', currentTheme);
     syncThemeButton();
   });
 };
-
 document.addEventListener('DOMContentLoaded', () => {
-  StorageManager.setTheme(StorageManager.getTheme());
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.body.dataset.theme = savedTheme;
   bindControls();
   syncThemeButton();
 });
