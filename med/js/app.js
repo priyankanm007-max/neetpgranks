@@ -340,6 +340,494 @@ const getMatches = (query) => {
 
 const normalizeBranch = (value) => String(value || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, ' ');
 
+const RANK_BAND_20K_TO_29K = {
+  "MD Radio-Diagnosis": {
+    "GM": {
+      "2024": [
+        "Closed before 20k rank range"
+      ],
+      "2025": [
+        "Closed before 20k rank range"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Chamarajanagar Institute of Medical Sciences (G)",
+        "Karwar Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Kodagu Institute of Medical Sciences (G)",
+        "Haveri Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "Yenepoya Medical College (D)",
+        "AJ Institute of Medical Sciences (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "Kanachur Institute of Medical Sciences (P)"
+      ]
+    }
+  },
+  "MD Dermatology": {
+    "GM": {
+      "2024": [
+        "Closed before 20k rank range"
+      ],
+      "2025": [
+        "Closed before 20k rank range"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Hassan Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Vijayanagara Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "Yenepoya Medical College (D)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)"
+      ]
+    }
+  },
+  "MD General Medicine": {
+    "GM": {
+      "2024": [
+        "Closed before 20k rank range"
+      ],
+      "2025": [
+        "Kodagu Institute of Medical Sciences (G)",
+        "Chamarajanagar Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Vijayanagara Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Hassan Institute of Medical Sciences (G)",
+        "Shimoga Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "AJ Institute of Medical Sciences (P)",
+        "Father Muller Medical College (P)",
+        "Yenepoya Medical College (D)",
+        "Al-Ameen Medical College (P)"
+      ],
+      "2025": [
+        "AJ Institute of Medical Sciences (P)",
+        "Father Muller Medical College (P)",
+        "Kanachur Institute of Medical Sciences (P)"
+      ]
+    }
+  },
+  "MD Paediatrics": {
+    "GM": {
+      "2024": [
+        "Closed before 20k rank range"
+      ],
+      "2025": [
+        "Kodagu Institute of Medical Sciences (G)",
+        "Chamarajanagar Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Mandya Institute of Medical Sciences (G)",
+        "Raichur Institute of Medical Sciences (G)",
+        "Hassan Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Vijayanagara Institute of Medical Sciences, Ballari (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Yenepoya Medical College (D)",
+        "Father Muller Medical College (P)",
+        "Al-Ameen Medical College (P)"
+      ],
+      "2025": [
+        "AJ Institute of Medical Sciences (P)",
+        "Father Muller Medical College (P)",
+        "Navodaya Medical College (P)"
+      ]
+    }
+  },
+  "MS General Surgery": {
+    "GM": {
+      "2024": [
+        "Chamarajanagar Institute of Medical Sciences (G)",
+        "Karwar Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Kodagu Institute of Medical Sciences (G)",
+        "Haveri Institute of Medical Sciences (G)",
+        "Yadgiri Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Vijayanagara Institute of Medical Sciences, Ballari (G)",
+        "Shimoga Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Mandya Institute of Medical Sciences (G)",
+        "Hassan Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "AJ Institute of Medical Sciences (P)",
+        "Kanachur Institute of Medical Sciences (P)",
+        "K.V.G. Medical College (P)",
+        "Srinivas Institute of Medical Sciences (D)"
+      ],
+      "2025": [
+        "AJ Institute of Medical Sciences (P)",
+        "Kanachur Institute of Medical Sciences (P)",
+        "K.V.G. Medical College (P)",
+        "Srinivas Institute of Medical Sciences (D)"
+      ]
+    }
+  },
+  "MS OBGYN": {
+    "GM": {
+      "2024": [
+        "Hassan Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)",
+        "Belagavi Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Vijayanagara Institute of Medical Sciences (G)",
+        "Shimoga Institute of Medical Sciences (G)",
+        "Kodagu Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ],
+      "2025": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Mandya Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "Yenepoya Medical College (D)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "Kanachur Institute of Medical Sciences (P)"
+      ]
+    }
+  },
+  "MS Orthopaedics": {
+    "GM": {
+      "2024": [
+        "Chamarajanagar Institute of Medical Sciences (G)",
+        "Karwar Institute of Medical Sciences (G)",
+        "Kodagu Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Hassan Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)",
+        "Haveri Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Karnataka Institute of Medical Sciences, Hubballi (G)",
+        "Vijayanagara Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Mysore Medical College & Research Institute (G)",
+        "Shimoga Institute of Medical Sciences (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "K.V.G. Medical College (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "Srinivas Institute of Medical Sciences (D)"
+      ]
+    }
+  },
+  "MD Emergency Medicine": {
+    "GM": {
+      "2024": [
+        "Mysore Medical College & Research Institute (G)",
+        "Karnataka Institute of Medical Sciences (G)",
+        "Vijayanagara Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Karnataka Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)",
+        "Hassan Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)"
+      ]
+    }
+  },
+  "MD Anaesthesiology": {
+    "GM": {
+      "2024": [
+        "Hassan Institute of Medical Sciences (G)",
+        "Mandya Institute of Medical Sciences (G)",
+        "Belagavi Institute of Medical Sciences (G)",
+        "Karwar Institute of Medical Sciences (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "Shimoga Institute of Medical Sciences (G)",
+        "Hassan Institute of Medical Sciences (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Mysore Medical College & Research Institute (G)",
+        "Karnataka Institute of Medical Sciences, Hubballi (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Indira Gandhi Institute of Child Health (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "AJ Institute of Medical Sciences (P)",
+        "Yenepoya Medical College (D)",
+        "Kanachur Institute of Medical Sciences (P)",
+        "Father Muller Medical College (P)"
+      ],
+      "2025": [
+        "AJ Institute of Medical Sciences (P)",
+        "Al-Ameen Medical College (P)",
+        "K.V.G. Medical College (P)",
+        "Srinivas Institute of Medical Sciences (D)"
+      ]
+    }
+  },
+  "MD Pathology": {
+    "GM": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ]
+    }
+  },
+  "MD Community Medicine (PSM)": {
+    "GM": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ]
+    }
+  },
+  "MD Pharmacology": {
+    "GM": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)",
+        "KIMS Hubballi (G)"
+      ]
+    },
+    "OBC": {
+      "2024": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ],
+      "2025": [
+        "Bangalore Medical College & Research Institute (G)",
+        "Mysore Medical College & Research Institute (G)"
+      ]
+    },
+    "ME": {
+      "2024": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ],
+      "2025": [
+        "Father Muller Medical College (P)",
+        "AJ Institute of Medical Sciences (P)",
+        "St. John's Medical College (P)"
+      ]
+    }
+  }
+};
+
+const resolveQuotaKey = (cutoffGroup) => {
+  const norm = String(cutoffGroup || '').trim().toUpperCase();
+  if (norm === 'GM') return 'GM';
+  if (norm === 'ME') return 'ME';
+  if (norm.includes('OBC') || norm.includes('2A')) return 'OBC';
+  return null;
+};
+
+SPECIALIZATION_CUTOFFS.forEach((entry) => {
+  const branchKey = Object.keys(RANK_BAND_20K_TO_29K).find(
+    (name) => normalizeBranch(name) === normalizeBranch(entry.specialization)
+  );
+  if (!branchKey) return;
+  const quotaKey = resolveQuotaKey(entry.cutoffGroup);
+  if (quotaKey && RANK_BAND_20K_TO_29K[branchKey]?.[quotaKey]) {
+    entry.rankBand20kTo29k = RANK_BAND_20K_TO_29K[branchKey][quotaKey];
+  }
+});
+
+const renderRankBandSection = (entry) => {
+  const quotaData = entry.rankBand20kTo29k || (() => {
+    const branchKey = Object.keys(RANK_BAND_20K_TO_29K).find(
+      (name) => normalizeBranch(name) === normalizeBranch(entry.specialization)
+    );
+    if (!branchKey) return null;
+    const quotaKey = resolveQuotaKey(entry.cutoffGroup);
+    return quotaKey ? RANK_BAND_20K_TO_29K[branchKey]?.[quotaKey] : null;
+  })();
+
+  if (!quotaData) return '';
+
+  const years = [2024, 2025];
+  const yearCards = years.map((year) => {
+    const colleges = quotaData[year] || [];
+    const isClosed = colleges.length === 1 && colleges[0].toLowerCase().includes('closed');
+    const content = isClosed
+      ? `<div class="college-closed">${colleges[0]}</div>`
+      : colleges.map((college) => `<div>${college}</div>`).join('');
+
+    return `
+      <section class="college-year-card">
+        <h4>${year} Allotted Colleges</h4>
+        <div class="college-stack">
+          ${content}
+        </div>
+      </section>
+    `;
+  }).join('');
+
+  return `
+    <div class="branch-allotment-wrap rank-band-wrap">
+      <div class="rank-band-header">
+        <h3 class="rank-band-heading">rank band:20k to 29k</h3>
+      </div>
+      <div class="college-list-groups college-lists--side-by-side">
+        ${yearCards}
+      </div>
+    </div>
+  `;
+};
+
+
 const renderCutoffCell = (entry, year) => {
   const value = entry.cutoffs[year] || '';
   return `<td class="cutoff-cell"><span class="cutoff-range">${value}</span></td>`;
@@ -429,6 +917,7 @@ const renderResults = (query = '') => {
           </table>
         </div>
         ${renderCategoryColleges(entry)}
+        ${renderRankBandSection(entry)}
       </article>
     `;
   });

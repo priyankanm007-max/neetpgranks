@@ -442,6 +442,46 @@ th {
   font-style: italic;
 }
 
+.rank-band-wrap {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--border);
+}
+
+.rank-band-header {
+  margin-bottom: 0.85rem;
+}
+
+.rank-band-heading {
+  display: inline-block;
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  background: var(--panel-alt);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.college-year-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.college-closed {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--muted);
+  background: var(--panel-alt);
+  border-radius: 4px;
+  border-left: 3px solid var(--muted);
+}
+
 .empty-state {
   padding: 1rem 0.2rem;
   color: var(--muted);

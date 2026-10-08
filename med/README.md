@@ -1,6 +1,6 @@
 # NEET PG Cutoff Finder
 
-A lightweight branch lookup for NEET PG cutoff ranges. Search a specialty, choose a suggestion, and view available 2024–2025 ranks by category.
+A lightweight branch lookup for NEET PG cutoff ranges. Search a specialty, choose a suggestion, and view available 2024–2025 ranks by category along with 20k to 29k rank band allotted college lists.
 
 ## Run locally
 
